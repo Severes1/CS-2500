@@ -1,0 +1,49 @@
+;; The first three lines of this file were inserted by DrRacket. They record metadata
+;; about the language level of this file in a form that our tools can easily process.
+#reader(lib "htdp-beginner-reader.ss" "lang")((modname |MattDailis HW1|) (read-case-sensitive #t) (teachpacks ()) (htdp-settings #(#t constructor repeating-decimal #f #t none #f () #f)))
+;; Finger Exercises
+
+(+ 1 2 3 4 5 6 7 8 9) ;; 45
+(cos pi) ;; #i-1.0
+(string-append "CS" " " "2500" "h") ;; "CS 2500h"
+(string->number "I have 5 apples") ;; false
+(string->number "5 apples I have") ;; false
+(string->number "5") ;; 5
+(string->number "     5     ") ;; false ... so the entire string must be a number
+(string->number "3.1415926") ;; 3.1415926
+(define (xor a b)
+  (and (or a b) (not (and a b))))
+(check-expect (xor #true #false) #true)
+(check-expect (xor #true #true) #false)
+(check-expect (xor #false #false) #false)
+
+;; Problem 1: Thanks
+
+(define (thanks s)
+  (string-append "Thanks, " s "!"))
+(check-expect (thanks "Santa") "Thanks, Santa!")
+
+;; Problem 2: Slinky
+
+;; slinky (t) = 1 + floor((t-30)/7), and the step may be no less than zero.
+(define (slinky t)
+  (max (add1 (floor (/ (- t 30) 7))) 0))
+
+;;; Table and requested values:
+; (slinky 42) -> step 2
+; (slinky 54) -> step 4
+; (slinky 3600) -> 511 ; The slinky will be on the 511th step after 1 hour
+; (slinky 25) -> step 0
+; (slinky 35) -> step 1
+; (slinky 45) -> step 3
+; (slinky 125) -> step 14
+
+(check-expect (slinky 42) 2)
+(check-expect (slinky 54) 4)
+(check-expect (slinky 3600) 511)
+(check-expect (slinky 25) 0)
+(check-expect (slinky 35) 1)
+(check-expect (slinky 45) 3)
+(check-expect (slinky 125) 14)
+
+
